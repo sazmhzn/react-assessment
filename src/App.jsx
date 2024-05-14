@@ -23,7 +23,6 @@ function App() {
       //checking if the duplicate value exit in the array
       if (list.name === item) {
         setAlert("Item already exists in the list");
-        //tried to generate the alert pop up but is preventing the user from adding the value
         alert("stop");
       } else {
         setAlert("");
