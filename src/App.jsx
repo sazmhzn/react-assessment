@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 import { ShoppingListItem } from "./components/ShoppingListItem";
 
@@ -8,24 +9,30 @@ function App() {
 
   //Do something when button is clicked
   const handleClick = () => {
-    addShoppingList(item)
-    console.log("button clicked");
+    addShoppingList(item);
+    console.log(item, "onclick"); 
+    console.log(shoppingList); 
   };
+
 
   // Get the value from the input
   const handleChange = (e) => {
-    setItem((prev) => e.target.value);
+    // setItem(e.target.value);
+    setItem(  () =>  e.target.value )
   };
 
-  const addShoppingList = (list) => {
+  const addShoppingList = (item) => {
     //set the shopping list
-    setShoppingList([...shoppingList, list]);
+    setShoppingList([...shoppingList, {
+      id: uuidv4(),
+      name: item,
+    }]);
   };
 
-  const deleteShoppingList = (item) => {
-    setShoppingList( shoppingList.filter( list => list !== item ) )
-  }
-
+  // const deleteShoppingList = (item) => {
+  //   console.log("delete pressed for: ", item);
+  //   setShoppingList(shoppingList.filter((list) => list.id !== item.id));
+  // };
 
   return (
     <div className="container">
@@ -37,6 +44,7 @@ function App() {
           placeholder="E.g. Carrots"
           className="v__input flex-1"
           onChange={handleChange}
+          // onChange={ (e) => setItem( e.target.value ) }
         />
         <button className="v__button" onClick={handleClick}>
           Add
@@ -44,14 +52,16 @@ function App() {
       </div>
       <div className="v__list-container overflow-y-scroll">
         {/* Map your data here: */}
-        {shoppingList && shoppingList.map( (item) => {
-          return (
-           <ShoppingListItem name={item} />
-          )
-        } )}
 
+        {shoppingList.length > 0 ? (
+          shoppingList.map((item) => {
+            return (<ShoppingListItem name={item.name}/> );
+          })
+        ) : (
+          <p className="mb-4">No List Found!!</p>
+        )}
 
-        <ShoppingListItem />
+        {/* <ShoppingListItem /> */}
       </div>
     </div>
   );
