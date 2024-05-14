@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Album, Photo } from "./components";
-import { getAlbumByID, getAllAlbums } from "./service/image-services";
+import { getAllAlbums, getPhotoByID } from "./service/image-services";
 
 // const DUMMY_DATA = [
 //   {
@@ -29,7 +29,7 @@ function App() {
 
   const [album, setAlbum] = useState([]);
   const [photo, setPhoto] = useState([]);
-  const [albumId, setAlbumId] = useState('')
+  const [albumId, setAlbumId] = useState(0)
 
   useEffect(() => {
     getAllAlbums()
@@ -43,7 +43,7 @@ function App() {
   }, []);
 
     useEffect(() => {
-      getAlbumByID(albumId)
+      getPhotoByID(albumId)
         .then((data) => {
           // console.log("Photo: ");
           setPhoto(data);
@@ -52,11 +52,10 @@ function App() {
           alert("API server error in fetching Photos");
           console.log(err);
         });
-    }, []);
+    }, [albumId]);
 
   const handleClick = (id) => {
-    console.log(photo);
-    setAlbumId(id)
+     setAlbumId(id)
   }
 
 
@@ -91,6 +90,12 @@ function App() {
             {photo.map((photo) => (
               <Photo {...photo} key={photo.id} />
             ))}
+
+            {
+              !photo.length && (
+                <p className="col-span-4">No photos found in this album</p>
+              )
+            }
 
             {/* {photo && photo.map((photo) => <Photo {...photo} key={index} />)} */}
 

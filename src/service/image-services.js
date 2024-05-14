@@ -13,7 +13,17 @@ export const getAllAlbums = () => {
   });
 };
 
-export const getAlbumByID = (id) => {
+export const getPhotos = () => {
+  return new Promise((resolve, reject) => {
+    axios.get(`${BASE_URL}/${id}/photos`).then((response) => {
+      resolve(response.data);
+    }).catch((error) => {
+      reject(error);
+    });
+  });
+};
+
+export const getPhotoByID = (id) => {
   return new Promise((resolve, reject) => {
     axios.get(`${BASE_URL}/${id}/photos`).then((response) => {
       resolve(response.data);
