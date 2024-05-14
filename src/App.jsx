@@ -46,8 +46,6 @@ function App() {
 
   //delete the shopping list item
   const deleteShoppingList = (id) => {
-    console.log("deleting for: ", id);
-    console.log("shoppingList: ", shoppingList);
     setShoppingList(shoppingList.filter((list) => list.id !== id));
   };
 
