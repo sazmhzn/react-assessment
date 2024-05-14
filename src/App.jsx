@@ -8,6 +8,7 @@ const DUMMY_DATA = [
     title: "accusamus beatae ad facilis cum similique qui sunt",
     url: "https://via.placeholder.com/600/92c952",
     thumbnailUrl: "https://via.placeholder.com/150/92c952",
+    
   },
   {
     albumId: 1,
@@ -15,12 +16,18 @@ const DUMMY_DATA = [
     title: "reprehenderit est deserunt velit ipsam",
     url: "https://via.placeholder.com/600/771796",
     thumbnailUrl: "https://via.placeholder.com/150/771796",
+    
   },
-];
+]; 
 
 function App() {
   // you can make use of the following to get the base url
-  console.log(import.meta.env.VITE_BASE_URL);
+  // console.log(import.meta.env.VITE_BASE_URL);
+
+  // 
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  console.log(`${BASE_URL}/album`);
+
 
   return (
     <div className="container">
