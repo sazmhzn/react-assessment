@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import "./App.css";
 import { Album, Photo } from "./components";
+import { getAllAlbums } from "./service/image-services";
 
 const DUMMY_DATA = [
   {
@@ -25,8 +27,21 @@ function App() {
   // console.log(import.meta.env.VITE_BASE_URL);
 
   // 
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
-  console.log(`${BASE_URL}/album`);
+  // const BASE_URL = import.meta.env.VITE_BASE_URL;
+  // console.log(`${BASE_URL}/album`);
+
+  const [album, setAlbum] = ueState([]);
+
+  useEffect(() => {
+    getAllAlbums().then((data) => {
+      setAlbum(data);
+    }).catch((err) => {
+      alert("API server error");
+      console.log(err);
+    });
+  }, []);
+
+  console.log(album);
 
 
   return (
