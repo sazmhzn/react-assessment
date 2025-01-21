@@ -1,28 +1,29 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import counterContext from "../context/counterContext";
 
-const Child = ({setCount}) => {
+const Child = () => {
+  const { increment, decrement } = useContext(counterContext);
   // const [count, setCount] = useState(0)
 
-  const handleMinusClick = () => {
-    /* Implement logic here */
-    setCount((prev) => prev-1)
-    
-  };
+  // const handleMinusClick = () => {
+  //   /* Implement logic here */
+  //   setCount((prev) => prev-1)
 
-  const handlePlusClick = () => {
-    /* Implement logic here */
-    setCount((prev) => prev+1)
-  };
+  // };
+
+  // const handlePlusClick = () => {
+  //   /* Implement logic here */
+  //   setCount((prev) => prev+1)
+  // };
 
   return (
     <div>
-      <button type="button" className="btn" onClick={handleMinusClick}>
+      <button type="button" className="btn" onClick={decrement}>
         -
       </button>
-      <button type="button" className="btn" onClick={handlePlusClick}>
+      <button type="button" className="btn" onClick={increment}>
         +
       </button>
-      
     </div>
   );
 };
